@@ -346,6 +346,9 @@ let g:browser = 'open '
     autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 expandtab
     autocmd FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+    " Strip out trailing white space at the end of lines.
+    autocmd FileType cucumber,ruby,erub,yaml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
     " markdown goodness
     autocmd BufRead *.mkd  set autoindent formatoptions=tcroqn2 comments=n:>
     au BufRead,BufNewFile *etc/nginx/* set ft=nginx 
